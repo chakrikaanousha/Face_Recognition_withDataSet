@@ -16,7 +16,7 @@ chakrika_encoding = face_recognition.face_encodings(chakrika_image)[0]
 
 known_faces_encoding = [anisha_encoding,chakrika_encoding]
 
-known_faces_name = ["anisha", "chakrika"]
+known_faces_name = ["anisha", "chakrika", "Unknown"]
 
 Room = known_faces_name.copy()
 face_location = []#stores the loc of face - coordinates
@@ -41,7 +41,7 @@ while True:
         face_names=[]
         for face_encoding in face_encodings:
             matches = face_recognition.compare_faces(known_faces_encoding,face_encoding)
-            name = ""
+            name = "Unknown"
             face_distance = face_recognition.face_distance(known_faces_encoding,face_encoding)
             best_match_index = np.argmin(face_distance)#?////
             if matches[best_match_index]:
