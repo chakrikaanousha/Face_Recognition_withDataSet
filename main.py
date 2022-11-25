@@ -2,8 +2,13 @@ import face_recognition
 import cv2
 import numpy as np
 import csv#comma seperated files
+import time
 import os #to acess all the fies in the system
 from datetime import datetime
+
+from gpiozero import AngularServo
+servo = AngularServo(18, initial_angle = 0, min_pulse_width = 0.006, max_pulse_width = 0.0023)
+
 
 video_capture = cv2.VideoCapture(0)
 
@@ -52,6 +57,12 @@ while True:
                 if name in Room:
                     Room.remove(name)
                     print(Room)
+                    
+                    
+                    servo.angle = -90
+                    time.sleep = 2
+                    servo.angle=90 
+                    
                     current_time = now.strftime("%H - %M - %S")
                     lnwriter.writerow([name,current_time])
     cv2.imshow("register",frame)
